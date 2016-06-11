@@ -1,0 +1,41 @@
+<modification>
+
+	<id>Admin Name After Title</id>
+	<version>1.5.+</version>
+	<vqmver>2.1.5</vqmver>
+	<author>LeorLindel</author>
+	
+	<file name="admin/view/template/catalog/product_form.tpl">
+		<operation>
+			<search position="replace"><![CDATA[
+      <h1><img src="view/image/product.png" alt="" /> <?php echo $heading_title; ?></h1>
+			]]></search>
+			<add><![CDATA[
+      <h1><img src="view/image/product.png" alt="" /> <?php echo $heading_title; ?>&nbsp;&raquo;&nbsp;<?php foreach ($languages as $language) ?><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['name'] : ''; ?></h1>
+			]]></add>
+		</operation>
+	</file>
+	
+	<file name="admin/view/template/catalog/category_form.tpl">
+		<operation>
+			<search position="replace"><![CDATA[
+      <h1><img src="view/image/category.png" alt="" /> <?php echo $heading_title; ?></h1>
+			]]></search>
+			<add><![CDATA[
+      <h1><img src="view/image/category.png" alt="" /> <?php echo $heading_title; ?>&nbsp;&raquo;&nbsp;<?php foreach ($languages as $language) ?><?php echo isset($category_description[$language['language_id']]) ? $category_description[$language['language_id']]['name'] : ''; ?></h1>
+			]]></add>
+		</operation>
+	</file>
+	
+	<file name="admin/view/template/catalog/information_form.tpl">
+		<operation>
+			<search position="replace"><![CDATA[
+      <h1><img src="view/image/information.png" alt="" /> <?php echo $heading_title; ?></h1>
+			]]></search>
+			<add><![CDATA[
+      <h1><img src="view/image/information.png" alt="" /> <?php echo $heading_title; ?>&nbsp;&raquo;&nbsp;<?php foreach ($languages as $language) ?><?php echo isset($information_description[$language['language_id']]) ? $information_description[$language['language_id']]['title'] : ''; ?></h1>
+			]]></add>
+		</operation>
+	</file>
+
+</modification>

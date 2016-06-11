@@ -1,0 +1,119 @@
+﻿<modification>
+	<id>Admin Product View Link</id>
+	<version>1</version>
+	<vqmver>2.1.5</vqmver>
+	<author>godologic</author>
+	<file name="admin/controller/catalog/product.php">
+		<operation>
+			<search position="after"><![CDATA[$this->data['delete'] = $this->url->link('catalog/product/delete', 'token=' . $this->session->data['token'] . $url, 'SSL');]]></search>
+			<add><![CDATA[// VqMod admin_catalog_view_links
+    $this->data['store'] = HTTP_CATALOG;
+    $this->data['stores'] = array();
+
+    $this->load->model('setting/store');
+
+    $results = $this->model_setting_store->getStores();
+
+      foreach ($results as $result) {
+      $this->data['stores'][] = array(
+      'name' => $result['name'],
+      'id' => $result['store_id'],
+      'href' => $result['url']);
+      }
+// End Of VqMod admin_catalog_view_links]]></add>
+		</operation>
+	</file>
+    <file name="admin/view/template/catalog/product_list.tpl">
+    <operation>
+      <search position="after"><![CDATA[<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]]]></search>
+      <add><![CDATA[<?php } ?>
+      <?php
+      $this->load->model('catalog/product');
+      $product_store = $this->model_catalog_product->getProductStores($product['product_id']);
+      ?>
+      <?php if (in_array(0, $product_store)) { ?>
+       [<a onClick="window.open('<?php echo $store . 'index.php?route=product/product&product_id=' . $product['product_id']; ?>');">View in <?php echo basename($store); ?></a>]<br />
+       <?php } ?>
+          <?php foreach ($stores as $storel) { ?>
+            <?php if (in_array($storel['id'], $product_store)) { ?>
+             [<a onClick="window.open('<?php echo $storel['href'] . 'index.php?route=product/product&product_id=' . $product['product_id']; ?>');">View in <?php echo $storel['name']; ?></a>]<br />
+           <?php } ?>]]></add>
+    </operation>
+  </file>
+    <file name="admin/controller/catalog/category.php">
+    <operation>
+      <search position="after"><![CDATA[$this->data['delete'] = $this->url->link('catalog/category/delete', 'token=' . $this->session->data['token'], 'SSL');]]></search>
+      <add><![CDATA[// VqMod admin_catalog_view_links
+    $this->data['store'] = HTTP_CATALOG;
+    $this->data['stores'] = array();
+
+    $this->load->model('setting/store');
+
+    $results = $this->model_setting_store->getStores();
+
+      foreach ($results as $result) {
+        $this->data['stores'][] = array(
+        'name' => $result['name'],
+        'id' => $result['store_id'],
+        'href' => $result['url']);
+      }
+// End Of VqMod admin_catalog_view_links]]></add>
+    </operation>
+  </file>
+    <file name="admin/view/template/catalog/category_list.tpl">
+    <operation>
+      <search position="after"><![CDATA[<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]]]></search>
+      <add><![CDATA[<?php } ?>
+        <?php
+        $this->load->model('catalog/category');
+        $category_store = $this->model_catalog_category->getCategoryStores($category['category_id']);
+        ?>
+        <?php if (in_array(0, $category_store)) { ?>
+         [<a onClick="window.open('<?php echo $store . 'index.php?route=product/category&path=' . $category['category_id']; ?>');">View in <?php echo basename($store); ?></a>]<br />
+        <?php } ?>
+        <?php foreach ($stores as $storel) { ?>
+          <?php if (in_array($storel['id'], $category_store)) { ?>
+         [<a onClick="window.open('<?php echo $storel['href'] . 'index.php?route=product/category&path=' . $category['category_id']; ?>');">View in <?php echo $storel['name']; ?></a>]<br />
+        <?php } ?>
+]]></add>
+    </operation>
+  </file>
+    <file name="admin/controller/catalog/manufacturer.php">
+    <operation>
+      <search position="after"><![CDATA[$this->data['delete'] = $this->url->link('catalog/manufacturer/delete', 'token=' . $this->session->data['token'] . $url, 'SSL');]]></search>
+      <add><![CDATA[// VqMod admin_catalog_view_links
+    $this->data['store'] = HTTP_CATALOG;
+    $this->data['stores'] = array();
+
+    $this->load->model('setting/store');
+
+    $results = $this->model_setting_store->getStores();
+
+      foreach ($results as $result) {
+        $this->data['stores'][] = array(
+        'name' => $result['name'],
+        'id' => $result['store_id'],
+        'href' => $result['url']);
+      }
+// End Of VqMod admin_catalog_view_links]]></add>
+    </operation>
+  </file>
+    <file name="admin/view/template/catalog/manufacturer_list.tpl">
+    <operation>
+      <search position="after"><![CDATA[<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]]]></search>
+      <add><![CDATA[<?php } ?>
+      <?php
+      $this->load->model('catalog/manufacturer');
+      $manufacturer_store = $this->model_catalog_manufacturer->getManufacturerStores($manufacturer['manufacturer_id']);
+      ?>
+      <?php if (in_array(0, $manufacturer_store)) { ?>
+       [<a onClick="window.open('<?php echo $store . 'index.php?route=product/manufacturer/product&manufacturer_id=' . $manufacturer['manufacturer_id']; ?>');">View in <?php echo basename($store); ?></a>]<br />
+       <?php } ?>
+      <?php foreach ($stores as $storel) { ?>
+        <?php if (in_array($storel['id'], $manufacturer_store)) { ?>
+        [<a onClick="window.open('<?php echo $storel['href'] . 'index.php?route=product/manufacturer/product&manufacturer_id=' . $manufacturer['manufacturer_id']; ?>');">View in <?php echo $storel['name']; ?></a>]<br />
+      <?php } ?>
+]]></add>
+    </operation>
+  </file>
+</modification>

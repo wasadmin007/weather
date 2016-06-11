@@ -1,0 +1,14 @@
+---------- Date: 2014-06-01 05:46:14 ~ IP : 70.113.52.106 ----------
+REQUEST URI : /www/index.php?route=common/home
+MOD DETAILS:
+   modFile   : /home/wasadmin/public_html/www/vqmod/xml/add_compare_link_156.xml
+   id        : Add Compare Link
+   version   : 1.0
+   vqmver    : 2.3.2
+   author    : Bruno MINGHETTI
+
+File Name    : catalog/view/theme/*/template/common/header.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): <div class="links"><a href="<?php echo $home; ?>"><?php echo $text_home; ?></a><a href="<?php echo $wishlist; ?>" id="wishlist-total"><?php echo $text_wishlist; ?></a><a href="<?php echo $account; ?>"><?php echo $text_account; ?></a><a href="<?php echo $shopping_cart; ?>"><?php echo $text_shopping_cart; ?></a><a href="<?php echo $checkout; ?>"><?php echo $text_checkout; ?></a></div>
+----------------------------------------------------------------------
+
+

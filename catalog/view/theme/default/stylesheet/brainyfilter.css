@@ -1,0 +1,313 @@
+/**
+* BrainyFilter 2.2, April 19, 2014 / brainyfilter.com
+* Copyright 2014 Giant Leap Lab / www.giantleaplab.com
+* License: Commercial. Reselling of this software or its derivatives is not allowed. You may use this software for one website ONLY including all its subdomains if the top level domain belongs to you and all subdomains are parts of the same OpenCart store.
+* Support: support@giantleaplab.com
+*/
+#brainyfilter-panel { 
+	padding:0;
+	margin-top: -1px;
+	position: relative;
+}
+
+#brainyfilter-panel input{
+	text-align: right;
+}
+#brainyfilter-panel .box-content{
+	border: 0;
+}
+#bf-slider-range {
+	margin-top:10px;
+	clear:both;
+}
+#bf-range-max, #bf-range-min {
+	width: 43px;
+	min-width: 43px;
+}
+.help-txt-heading {
+	font-size: 10px; 
+	color:#000;
+}
+.help-txt {
+	overflow: auto;
+}
+
+.bf-buttonclear {
+	background: url("../image/brainyfilter/sprite.png") no-repeat 0 -24px;
+	color: #8E8E8E;
+	text-decoration: underline;
+	padding-left: 18px;
+	padding-right: 0;
+	cursor: pointer;
+	border: 0;
+	margin: 0;
+	min-height: 16px;
+}
+.bf-buttonclear:hover {
+	background: url("../image/brainyfilter/sprite.png") no-repeat 0 -53px;
+	color: #B83D3D;
+}
+.ajax-shadow {
+	position: absolute;
+	z-index: 1000;
+	display: none;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: none;
+}
+.bf-attr-group-header {
+	font-weight: bold;
+	font-size: 14px;
+	line-height: 26px;
+	background: #CCC;
+	border: 0;
+	padding: 0 10px;
+	border-radius: 0;
+	margin-top: -1px;
+	z-index: 3;
+	position: relative;
+}
+.bf-attr-header {
+	border-radius: 0;
+	border: 0;
+	border-top: 1px solid #DBDEE1;
+	background: #EEE;
+	font-weight: normal;
+	padding: 7px 10px;
+	z-index: 2;
+	position: relative;
+}
+.bf-attr-filter {
+	position: relative;
+}
+#bf-price-container .box-content {
+	border: 0;
+}
+.bf-attr-filter select {
+	margin: 0;
+	width: 100%;
+}
+
+.bf-attr-filter input {
+	margin: 0;
+}
+.bf-attr-filter input[type="checkbox"], .bf-attr-filter input[type="radio"] {
+	display: block;
+}
+.bf-attr-r1 .bf-c-2 {
+	background: url("../image/brainyfilter/stars-1.png") no-repeat center left;
+}
+.bf-attr-r2 .bf-c-2 {
+	background: url("../image/brainyfilter/stars-2.png") no-repeat center left;
+}
+.bf-attr-r3 .bf-c-2 {
+	background: url("../image/brainyfilter/stars-3.png") no-repeat center left;
+}
+.bf-attr-r4 .bf-c-2 {
+	background: url("../image/brainyfilter/stars-4.png") no-repeat center left;
+}
+.bf-attr-r5 .bf-c-2 {
+	background: url("../image/brainyfilter/stars-5.png") no-repeat center left;
+}
+
+#bf-price-container {
+	padding: 5px 5px;
+}
+.bf-count {
+	float:right;
+	background: #F46234;
+	color: #fff;
+	line-height: 20px;
+	padding: 0 3px;
+	border-radius: 3px;
+	display: block;
+	position: relative;
+}
+.bf-disabled {
+	color: #ccc;
+}
+.ndash {
+	margin-left: 5px;
+	margin-right: 5px;
+}
+#slider-container {
+	margin: 0 7px 5px;
+	overflow: inherit;
+
+}
+.bf-cross, .bf-close-btn, .bf-arrow {
+	background: url("../image/brainyfilter/sprite.png") no-repeat;
+	vertical-align: middle;
+	cursor: pointer;
+}
+.bf-close-btn {
+	margin-left: 10px;
+	background-position: 50% -24px;
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+}
+.bf-close-btn:hover {
+	background-position: 50% -53px;
+}
+.bf-cross {
+	background-position: 50% -80px;
+	display: inline;
+	font-size: 0;
+	padding: 8px;
+}
+.bf-cross:hover {
+	background-position: 50% -103px;
+}
+.bf-float-submit {
+	position: absolute;
+	z-index: 99;
+	border: 1px solid #DEDEDE;
+	background-color: #FEFEFE;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	padding: 5px 10px;
+	top: -5px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.bf-tick {
+	width: 15px;
+	height: 15px;
+	display: inline-block;
+	margin-right: 10px;
+	background: url("../image/brainyfilter/sprite.png") no-repeat 0 1px;
+	vertical-align: middle;
+}
+.bf-tick.bf-loading {
+	background: url("../image/brainyfilter/loading.gif") no-repeat 50% 50%;
+}
+.bf-buttonsubmit-wrapper{
+	position: relative;
+	display: inline-block;
+	float: right;
+}
+#ps-module-filter-form .bf-buttonsubmit {
+	margin-right: 9px;
+}
+.bf-attr-block-cont {
+	display: table;
+	width: 100%;
+	padding: 0 10px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+.bf-attr-block .bf-attr-block-cont .bf-attr-filter:last-child .bf-cell {
+	border-bottom: 0;
+}
+#ps-module-filter-form div:nth-last-of-type(2) .bf-attr-filter:last-child .bf-cell {
+	border-bottom: 1px solid #EEE;
+}
+.bf-row {
+	display: table-row;
+}
+.bf-cell {
+	display: table-cell;
+	border-bottom: 1px solid #EEE;
+	vertical-align: middle;
+	padding: 4px 0;
+	height: 20px;
+}
+.bf-cell label {
+	display: block;
+	/*white-space: pre-wrap;*/
+	padding-right: 3px;
+}
+.bf-c-1 {
+	width: 12px;
+	padding-right: 4px;
+}
+.bf-c-3 {
+	width: 1px;
+	text-align: right;
+}
+.bf-hidden {
+	display: none;
+}
+.bf-sliding {
+	overflow: hidden;
+	display: block;
+}
+.bf-sliding-show {
+	color: #0D9FDF;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 7px 10px;
+    position: relative;
+	cursor: pointer;
+}
+.bf-clickable {
+	cursor: pointer;
+}
+.bf-arrow {
+	background-position: 50% -153px;
+	display: inline;
+	font-size: 0;
+	padding: 8px;
+	float: right;
+}
+
+.bf-attr-filter label img {
+    height: 20px;
+    vertical-align: middle;
+    margin-right: 3px;
+}
+
+/* retina backgrounds */
+@media
+only screen and (-webkit-min-device-pixel-ratio: 1.5),
+only screen and (   min--moz-device-pixel-ratio: 1.5),
+only screen and (     -o-min-device-pixel-ratio: 3/2),     /* 3/2 */
+only screen and (        min-device-pixel-ratio: 1.5),       /* 1.5 */
+only screen and (                min-resolution: 144dpi), /* 144px */
+only screen and (                min-resolution: 1.5dppx) {
+    .bf-buttonclear {        
+        background-image: url("../image/brainyfilter/sprite@2x.png")!important;
+        background-size: 16px 181px;
+    }
+    .bf-buttonclear:hover {
+		background-image: url("../image/brainyfilter/sprite@2x.png")!important;
+        background-size: 16px 181px;
+	}
+	.bf-cross, .bf-close-btn, .bf-arrow {
+		background-image: url("../image/brainyfilter/sprite@2x.png")!important;
+        background-size: 16px 181px;
+	}
+	.bf-tick {
+		background-image: url("../image/brainyfilter/sprite@2x.png")!important;
+        background-size: 16px 181px;
+	}
+	.bf-tick.bf-loading {
+		background-image: url("../image/brainyfilter/loading@2x.gif")!important;
+        background-size: 16px 16px;
+	}
+		.bf-attr-r1 .bf-c-2 {
+		background-image: url("../image/brainyfilter/stars-1@2x.png")!important;
+        background-size: 95px 15px;
+	}
+	.bf-attr-r2 .bf-c-2 {
+		background-image: url("../image/brainyfilter/stars-2@2x.png")!important;
+        background-size: 95px 15px;
+	}
+	.bf-attr-r3 .bf-c-2 {
+		background-image: url("../image/brainyfilter/stars-3@2x.png")!important;
+        background-size: 95px 15px;
+	}
+	.bf-attr-r4 .bf-c-2 {
+		background-image: url("../image/brainyfilter/stars-4@2x.png")!important;
+        background-size: 95px 15px;
+	}
+	.bf-attr-r5 .bf-c-2 {
+		background-image: url("../image/brainyfilter/stars-5@2x.png")!important;
+        background-size: 95px 15px;
+	}
+
+}

@@ -1,0 +1,1 @@
+<div style="width:100%; text-align:center; font-size:14px; background:#F00; color:#000; font-weight:600; padding:5px 0; z-index:1000; position:fixed;"><?php echo $this->language->get('admin_message'); ?></div>

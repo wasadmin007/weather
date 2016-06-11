@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<modification>
+  <id>OMF Swipe</id>
+  <version>1.0.2</version>
+  <vqmver>2.0.0</vqmver>
+  <author>www.wintechcomputers.com.au</author>
+   <file name="catalog/view/theme/omf/template/product/product_mobile.tpl">
+    <operation>
+      <search position="replace" offset="14"><![CDATA[<?php if ($thumb || $images) { ?>]]></search>
+      <add><![CDATA[<?php if ($thumb || $images) { ?>
+		<section id="images">
+			<?php if ($images) { ?>
+			<div id='slider' style="position:relative;z-index:1;-webkit-perspective:1000;-webkit-backface-visibility: hidden;">
+				<ul>
+					<li style='display:block'><div><img src="<?php echo $popup?>" alt="<?php echo $heading_title; ?>" width="100%" /></div></li>
+					<?php foreach ($images as $image) { ?>
+					<li style='display:none'><div><img src="<?php echo $image['popup']?>" alt="<?php echo $heading_title; ?>" width="100%" /></div></li>
+					<?php } ?>
+				</ul>
+			</div>
+			<a href='#' onclick='slider.prev();return false;'>&lt;-prev</a>&nbsp;&nbsp;<a href='#' onclick='slider.next();return false;'>next-&gt;</a>	
+			<?php } else { ?>
+			<a href="<?php echo $popup; ?>" title="<?php echo $heading_title; ?>"><img src="<?php echo $thumb; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" /></a>
+            <?php } ?>
+   		</section>
+		<?php } ?>]]></add>
+    </operation>
+	<operation>
+		<search position="before"><![CDATA[<?php echo $footer; ?>]]></search>
+		<add><![CDATA[<script src='catalog/view/theme/omf/js/swipe.js'></script>
+<script>
+	var slider = new Swipe(document.getElementById('slider'));
+</script>]]></add>
+	</operation>
+  </file>
+</modification>

@@ -1,0 +1,9 @@
+#notification {
+	position: fixed;
+	z-index: 999;
+	width: 600px;
+	right: 50%;
+	margin-right: -300px;
+	top: 50%;
+	margin-top: -35px;
+}

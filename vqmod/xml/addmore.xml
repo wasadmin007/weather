@@ -1,0 +1,29 @@
+<!-- Created using vQmod XML Generator by UKSB - http://www.opencart-extensions.co.uk //-->
+<!-- Use at you own risk. See disclaimer in INSTALL.txt //-->
+<modification>
+	<id><![CDATA[Update addthis to include Google+1 on product page]]></id>
+	<version><![CDATA[1.2]]></version>
+	<vqmver><![CDATA[2.1.5]]></vqmver>
+	<author><![CDATA[S George]]></author>
+	<file name="catalog/view/theme/default/template/product/product.tpl">
+	<file name="catalog/view/theme/miwapink/template/product/product.tpl">
+		<operation>
+			<search position="replace" offset="4"><![CDATA[<div class="share"><!-- AddThis Button BEGIN -->]]></search>
+			<add><![CDATA[
+<div class="share"><!-- AddThis Button BEGIN -->
+	<div class="addthis_default_style">
+		<a class="addthis_button_compact"><?php echo $text_share; ?></a>
+		<a class="addthis_button_email"></a>
+		<a class="addthis_button_print"></a>
+		<a class="addthis_button_facebook"></a>
+		<a class="addthis_button_twitter"></a>
+		<a class="addthis_button_facebook_like"></a>
+		<a class="addthis_button_google_plusone"></a>
+	</div>
+	<script type="text/javascript" src="//s7.addthis.com/js/250/addthis_widget.js"></script> 
+	<!-- AddThis Button END -->
+</div>
+			]]></add>
+		</operation>
+	</file>
+</modification>

@@ -1,0 +1,35 @@
+/**
+* BrainyFilter 2.2, April 19, 2014 / brainyfilter.com
+* Copyright 2014 Giant Leap Lab / www.giantleaplab.com
+* License: Commercial. Reselling of this software or its derivatives is not allowed. You may use this software for one website ONLY including all its subdomains if the top level domain belongs to you and all subdomains are parts of the same OpenCart store.
+* Support: support@giantleaplab.com
+*/
+.bf-admin-header {
+	background: #EEE;
+	line-height: 30px;
+	font-weight: normal;
+	padding: 0 10px;
+	font-size: 14px;
+	font-weight: bold;
+	text-align: left;
+}
+.bf-suboption {
+	margin-top: 3px;
+}
+.bf-signature {
+	font-size: 90%;
+	color: #999;	
+}
+.bf-signature a {
+	color: #999;	
+}
+table.form {
+	 border-spacing: 1px;
+	 border-collapse: separate;
+}
+#image_and_label {
+	margin-top: 8px;
+}
+input[readonly] {
+	color: #999;
+}

@@ -1,0 +1,153 @@
+<modification>
+	<id><![CDATA[city filter]]></id>
+	<version><![CDATA[1.5.5.1]]></version>
+	<vqmver><![CDATA[2.3.0]]></vqmver>
+	<author><![CDATA[www.belineweb.com, Mod From funcreates]]></author>	
+	
+	<file name="admin/controller/localisation/city.php">
+		<operation>
+			<search position="after"><![CDATA[protected function getList() {]]></search>
+			<add><![CDATA[
+		if (isset($this->request->get['filter_zone_id'])) {
+			$filter_zone_id = $this->request->get['filter_zone_id'];
+		} else {
+			$filter_zone_id = null;
+		}
+			]]></add>
+		</operation>				
+
+		<operation>
+			<search position="after" index="4"><![CDATA[$url = '';]]></search>
+			<add><![CDATA[
+		if (isset($this->request->get['filter_zone_id'])) {
+			$url .= '&filter_zone_id=' . $this->request->get['filter_zone_id'];
+		}
+			]]></add>
+		</operation>				
+
+		<operation>
+			<search position="after"><![CDATA[$data = array(]]></search>
+			<add><![CDATA[
+			'filter_zone_id' => $filter_zone_id,
+			]]></add>
+		</operation>	
+		
+		<operation info="Replace index function">
+			<search position="replace" offset="2"><![CDATA[$this->data['sort_zone'] = $this->url->link('localisation/city', 'token=' . $this->session->data['token'] . '&sort=zone' . $url, 'SSL');]]></search>
+			<add><![CDATA[
+		$this->data['sort_zone'] = $this->url->link('localisation/city', 'token=' . $this->session->data['token'] . '&sort=zone' . $url, 'SSL');
+		
+		$url = '';
+
+		if (isset($this->request->get['filter_zone_id'])) {
+			$url .= '&filter_zone_id=' . $this->request->get['filter_zone_id'];
+		}
+			]]></add>
+		</operation>
+		
+		<operation>
+			<search position="replace"><![CDATA[$city_total = $this->model_localisation_city->getTotalCities();]]></search>
+			<add><![CDATA[$city_total = $this->model_localisation_city->getTotalCities($data);]]></add>
+		</operation>				
+
+		<operation>
+			<search position="after"><![CDATA[$this->data['button_delete'] = $this->language->get('button_delete');]]></search>
+			<add><![CDATA[
+		$this->data['button_filter'] = $this->language->get('button_filter');
+
+		$this->data['token'] = $this->session->data['token'];
+			]]></add>
+		</operation>				
+
+		<operation>
+			<search position="after" index="5"><![CDATA[$url = '';]]></search>
+			<add><![CDATA[
+		if (isset($this->request->get['filter_zone_id'])) {
+			$url .= '&filter_zone_id=' . $this->request->get['filter_zone_id'];
+		}
+			]]></add>
+		</operation>				
+
+		<operation>
+			<search position="after"><![CDATA[$this->data['pagination'] = $pagination->render();]]></search>
+			<add><![CDATA[
+		$this->data['filter_zone_id'] = $filter_zone_id;
+		$this->load->model('localisation/zone');
+
+    	$this->data['zones'] = $this->model_localisation_zone->getzones();
+			]]></add>
+		</operation>				
+	</file>	
+	
+	<file name="admin/model/localisation/city.php">
+		<operation>
+			<search position="after"><![CDATA[$sql = "SELECT c.city_id AS city_id, c.zone_id AS zone_id, c.name AS name, c.status AS status, (SELECT name FROM " . DB_PREFIX . "zone z WHERE z.zone_id = c.zone_id AND z.status = '1') AS zone FROM " . DB_PREFIX . "city c";]]></search>
+			<add><![CDATA[
+		if (isset($data['filter_zone_id']) && !is_null($data['filter_zone_id'])) {
+			$sql .= " WHERE c.zone_id = '" . (int)$data['filter_zone_id'] . "'";
+		} else {
+			$sql .= " WHERE c.zone_id > '0'";
+		}
+		]]></add>
+		</operation>				
+
+		<operation>
+			<search position="replace" offset="1"><![CDATA[public function getTotalCities() {]]></search>
+			<add><![CDATA[
+	public function getTotalCities($data = array()) {
+      	$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "city");
+      	$sql = "SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "city`";
+		if (isset($data['filter_zone_id']) && !is_null($data['filter_zone_id'])) {
+			$sql .= " WHERE zone_id = '" . (int)$data['filter_zone_id'] . "'";
+		} else {
+			$sql .= " WHERE zone_id > '0'";
+		}
+
+		$query = $this->db->query($sql);
+			]]></add>
+		</operation>				
+	</file>	
+	
+	<file name="admin/view/template/localisation/city_list.tpl">
+		<operation>
+			<search position="after"><![CDATA[<tbody>]]></search>
+			<add><![CDATA[
+            <tr class="filter">
+              <td></td>
+              <td><select name="filter_zone_id">
+                  <option value="*"></option>
+                  <?php foreach ($zones as $zone) { ?>
+                  <?php if ($zone['zone_id'] == $filter_zone_id) { ?>
+                    <option value="<?php echo $zone['zone_id']; ?>" selected="selected"><?php echo $zone['name']; ?></option>
+                    <?php } else { ?>
+                    <option value="<?php echo $zone['zone_id']; ?>"><?php echo $zone['name']; ?></option>
+                   <?php } ?>
+                  <?php } ?>
+                </select></td>
+              <td></td>
+              <td></td>
+              <td align="right"><a onclick="filter();" class="button"><?php echo $button_filter; ?></a></td>
+            </tr>
+			]]></add>
+		</operation>				
+
+		<operation>
+			<search position="before"><![CDATA[<?php echo $footer; ?>]]></search>
+			<add><![CDATA[
+<script type="text/javascript"><!--
+function filter() {
+	url = 'index.php?route=localisation/city&token=<?php echo $token; ?>';
+	
+	var filter_zone_id = $('select[name=\'filter_zone_id\']').attr('value');
+	
+	if (filter_zone_id != '*') {
+		url += '&filter_zone_id=' + encodeURIComponent(filter_zone_id);
+	}	
+
+	location = url;
+}
+//--></script>
+			]]></add>
+		</operation>				
+	</file>	
+</modification>

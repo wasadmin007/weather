@@ -1,0 +1,38 @@
+<modification>
+	<id>Additional Images in Carousel</id>
+	<version>0.1</version>
+	<vqmver>2.X</vqmver>
+	<author>Nagant</author>
+
+	<file name="catalog/view/theme/default/template/product/product.tpl">
+	<file name="catalog/view/theme/miwapink/template/product/product.tpl">
+		<operation>
+			<search position="before"><![CDATA[<?php echo $footer; ?>]]></search>
+			<add><![CDATA[<!-- BOF om_jcarousel_additional.xml -->
+<?php if (count($images) > 2) { ?>
+	<?php $add_height = $this->config->get('config_image_additional_height'); ?>
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/default/stylesheet/carousel.css" />
+<script type="text/javascript" src="catalog/view/javascript/jquery/jquery.jcarousel.min.js"></script>
+<script type="text/javascript"><!--
+$(function() {
+	var visible = 2;
+	var thumb_width = $('.product-info .left').outerWidth(true);
+	$('.image-additional a').wrap('<li />');
+	$('.image-additional li').wrapAll('<ul class="jcarousel-skin-opencart" />');
+	$('.image-additional').width(thumb_width);
+	$('.product-info > .left + .right').css('margin-left', thumb_width + 'px');
+	$('.jcarousel-skin-opencart').jcarousel({
+		auto: 50,
+		scroll: 1,
+		visible: visible
+	});
+	$('.jcarousel-prev,.jcarousel-next').css('top',(<?php echo $add_height; ?> - $('.jcarousel-prev').height())/2 + 'px');
+	$('.jcarousel-prev').css('left', '5px');
+});
+//--></script>
+<?php } ?>
+<!-- EOF om_jcarousel_additional.xml -->]]></add>
+		</operation>
+	</file>
+
+</modification>

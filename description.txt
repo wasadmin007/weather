@@ -1,0 +1,33 @@
+LiveSearch Autofill (VQMOD/XML)
+
+========================================
+Upozornění / Notice:
+========================================
+
+Czech:
+Testováno při použití výchozí šablony (default) a českým jazykem/překladem (czech).
+Chcete-li použít s jinou šablonou nebo jiným jazykem, přizpůsobte si podle potřeby (soubory: language, PHP, TPL/CSS).
+
+English:
+Tested with the DEFAULT template and CZECH language!
+To use a different template or another language, adjust as needed (files: language, PHP, TPL / CSS). 
+
+
+========================================
+Popis / Description:
+========================================
+
+Czech:
+Našeptávač pro vyhledávání.
+
+English:
+Whisperer search.
+
+Modified from extension: 
+http://www.opencart.com/index.php?route=extension/extension/info&extension_id=13451
+
+========================================
+Další rozšíření / other extensions:
+======================================== 
+
+More extensions: [url=http://www.opencart.com/index.php?route=extension/extension&filter_username=frymi]http://www.opencart.com/index.php?route=extension/extension&filter_username=frymi[/url]

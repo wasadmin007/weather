@@ -1,0 +1,35 @@
+<!-- Created by Xyph3r 
+	 http://shopthemer.com
+	
+	This vQmod is for 1.5.x (contact me if you have problems or just delele this xml file)
+	
+	-->
+<modification>
+	<id><![CDATA[Pop-Up Notification]]></id>
+	<version><![CDATA[1.0]]></version>
+	<vqmver><![CDATA[2.3.2]]></vqmver>
+	<author><![CDATA[Xyph3r(OpenCart user) http://shopthemer.com]]></author>
+	<file name="catalog/view/theme/*/*/common/header.tpl">
+		<operation>
+			<search position="after"><![CDATA[common.js]]></search>
+			<add><![CDATA[<script type="text/javascript" src="catalog/view/theme/default/popup.js"></script>]]></add>
+		</operation>
+	</file>
+	<file name="catalog/view/theme/*/*/common/header.tpl">
+		<operation>
+			<search position="after"><![CDATA[stylesheet.css]]></search>
+			<add><![CDATA[<link rel="stylesheet" type="text/css" href="catalog/view/theme/default/stylesheet/popup.css" />]]></add>
+		</operation>
+	</file>
+	<file name="catalog/view/theme/*/template/product/product.tpl">
+		<operation>
+			<search position="replace"><![CDATA[$('html, body').animate({ scrollTop: 0 }, 'slow');]]></search>
+			<add><![CDATA[$('#cart .heading').fadeTo(350, 0.1); 
+				$('#cart .heading').fadeTo(350, 1); 
+				$('#cart .heading').fadeTo(350, 0.1); 
+				$('#cart .heading').fadeTo(350, 1); 
+				$('#cart .heading').fadeTo(350, 0.1); 
+				$('#cart .heading').fadeTo(350, 1);]]></add>
+		</operation>
+	</file>
+</modification>

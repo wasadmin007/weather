@@ -1,0 +1,15 @@
+<!-- Created by EP System Technologies - http://www.epstweb.com //-->
+<modification>
+	<id><![CDATA[Remove Affiliate Link]]></id>
+	<version><![CDATA[1.0]]></version>
+	<vqmver><![CDATA[2.x]]></vqmver>
+	<author><![CDATA[EPSYSTEMS]]></author>
+	
+	<file name="catalog/view/theme/miwapink/template/common/footer.tpl">
+		<operation>
+			<search position="replace"><![CDATA[<li><a href="<?php echo $affiliate; ?>"><?php echo $text_affiliate; ?></a></li>]]></search>
+			<add><![CDATA[<!-- <li><a href="<?php echo $affiliate; ?>"><?php echo $text_affiliate; ?></a></li> -->
+]]></add>
+		</operation>
+	</file>
+</modification>

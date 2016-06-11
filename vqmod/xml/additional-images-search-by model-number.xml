@@ -1,0 +1,21 @@
+<modification>
+	<id>Additional Product Images</id>
+        <version>1.0</version>
+        <vqmver>1.0.3</vqmver>
+        <author>SuppliesProfessor.com</author>
+<file name="catalog/view/theme/default/template/product/product.tpl">
+<file name="catalog/view/theme/miwapink/template/product/product.tpl">
+	<operation>
+		<search position="after" error="skip"><![CDATA[
+		<?php echo $heading_title; ?>" id="image" /></a>
+		]]></search>
+		
+	<add><![CDATA[
+	   <br><div class="image-additional">
+       <a href="http://<?php echo $model; ?>.jpg.to/l" title="<?php echo $heading_title; ?>" class="fancybox" rel="fancybox"><img onerror="this.style.display='none'" src="http://<?php echo $model; ?>.jpg.to/l" height="70" width"70" title="<?php echo $heading_title; ?>" alt="<?php echo $model; ?>" /></a></div>
+		]]></add>
+	</operation>
+</file>
+</modification>
+
+

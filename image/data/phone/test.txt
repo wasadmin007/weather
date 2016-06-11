@@ -1,0 +1,21 @@
+ Volume in drive C has no label.
+ Volume Serial Number is B867-3BED
+
+ Directory of C:\wamp\wwwdev\image\data\phone
+
+05/29/2014  07:31 PM    <DIR>          .
+05/29/2014  07:31 PM    <DIR>          ..
+04/06/2014  12:09 AM             3,055 samsung-galaxy-s-duos-2-s7582-100x100-imadr3hpsyvzyy6h.jpg
+04/04/2014  03:56 PM           279,065 Samsung-Galaxy-S5-0.jpg
+04/04/2014  03:55 PM             7,563 Samsung-Galaxy-S5-1.jpg
+04/04/2014  03:58 PM           238,350 Samsung-Galaxy-S5-2.jpg
+04/04/2014  03:58 PM           372,033 Samsung-Galaxy-S5-3.jpg
+04/04/2014  03:58 PM           402,425 Samsung-Galaxy-S5-4.jpg
+04/04/2014  03:58 PM           395,072 Samsung-Galaxy-S5-5.jpg
+04/04/2014  03:58 PM            77,560 Samsung-Galaxy-S5-6.jpg
+04/04/2014  03:59 PM           351,761 Samsung-Galaxy-S5-7.jpg
+04/04/2014  03:58 PM           257,591 Samsung-Galaxy-S5-8.jpg
+04/04/2014  03:59 PM           291,344 Samsung-Galaxy-S5-9.jpg
+05/29/2014  07:31 PM                 0 test.txt
+              12 File(s)      2,675,819 bytes
+               2 Dir(s)  169,412,841,472 bytes free

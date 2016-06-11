@@ -1,0 +1,70 @@
+---------- Date: 2015-03-27 18:44:03 ~ IP : 206.169.185.35 ----------
+REQUEST URI : /www/admin/index.php?route=catalog/category&amp;token=8a082567a853adbcc7d3f9c28c6aa3ab
+MOD DETAILS:
+   modFile   : /home/wasadmin/public_html/www/vqmod/xml/admin_catalog_view_links.xml
+   id        : Admin Product View Link
+   version   : 1
+   vqmver    : 2.1.5
+   author    : godologic
+
+File Name    : admin/controller/catalog/category.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $this->data['delete'] = $this->url->link('catalog/category/delete', 'token=' . $this->session->data['token'], 'SSL');
+----------------------------------------------------------------------
+
+
+---------- Date: 2015-03-27 18:44:18 ~ IP : 206.169.185.35 ----------
+REQUEST URI : /www/admin/index.php?route=catalog/category&amp;token=8a082567a853adbcc7d3f9c28c6aa3ab&amp;page=2
+MOD DETAILS:
+   modFile   : /home/wasadmin/public_html/www/vqmod/xml/admin_catalog_view_links.xml
+   id        : Admin Product View Link
+   version   : 1
+   vqmver    : 2.1.5
+   author    : godologic
+
+File Name    : admin/controller/catalog/category.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $this->data['delete'] = $this->url->link('catalog/category/delete', 'token=' . $this->session->data['token'], 'SSL');
+----------------------------------------------------------------------
+
+
+---------- Date: 2015-03-27 18:44:27 ~ IP : 206.169.185.35 ----------
+REQUEST URI : /www/admin/index.php?route=catalog/category/update&amp;token=8a082567a853adbcc7d3f9c28c6aa3ab&amp;category_id=8&amp;page=2
+MOD DETAILS:
+   modFile   : /home/wasadmin/public_html/www/vqmod/xml/admin_catalog_view_links.xml
+   id        : Admin Product View Link
+   version   : 1
+   vqmver    : 2.1.5
+   author    : godologic
+
+File Name    : admin/controller/catalog/category.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $this->data['delete'] = $this->url->link('catalog/category/delete', 'token=' . $this->session->data['token'], 'SSL');
+----------------------------------------------------------------------
+
+
+---------- Date: 2015-03-27 18:45:22 ~ IP : 206.169.185.35 ----------
+REQUEST URI : /www/admin/index.php?route=catalog/category/update&amp;token=8a082567a853adbcc7d3f9c28c6aa3ab&amp;category_id=8
+MOD DETAILS:
+   modFile   : /home/wasadmin/public_html/www/vqmod/xml/admin_catalog_view_links.xml
+   id        : Admin Product View Link
+   version   : 1
+   vqmver    : 2.1.5
+   author    : godologic
+
+File Name    : admin/controller/catalog/category.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $this->data['delete'] = $this->url->link('catalog/category/delete', 'token=' . $this->session->data['token'], 'SSL');
+----------------------------------------------------------------------
+
+
+---------- Date: 2015-03-27 18:45:22 ~ IP : 206.169.185.35 ----------
+REQUEST URI : /www/admin/index.php?route=catalog/category&amp;token=8a082567a853adbcc7d3f9c28c6aa3ab
+MOD DETAILS:
+   modFile   : /home/wasadmin/public_html/www/vqmod/xml/admin_catalog_view_links.xml
+   id        : Admin Product View Link
+   version   : 1
+   vqmver    : 2.1.5
+   author    : godologic
+
+File Name    : admin/controller/catalog/category.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $this->data['delete'] = $this->url->link('catalog/category/delete', 'token=' . $this->session->data['token'], 'SSL');
+----------------------------------------------------------------------
+
+

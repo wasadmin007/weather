@@ -1,0 +1,6 @@
+# Prevent Directoy listing 
+
+<FilesMatch "\.(xml|cache)">
+Order deny,allow
+Deny from all
+</FilesMatch>

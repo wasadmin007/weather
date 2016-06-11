@@ -1,0 +1,60 @@
+MyLiveChat
+Version : 1.0.0
+This is simple Extension Module for MyLiveChat.
+My LiveChat is an award-winning live chat service that helps increase website conversion rates through click to chat, live custom support features.
+Created By: www.mylivechat.com
+Built for and tested on OpenCart v1.5.6
+
+Upgrade
+=========
+
+
+Installation
+=========
+Simple, Place the following files in right directories.
+
+admin/controller/module/mylivechat.php
+admin/language/english/module/mylivechat.php
+admin/view/template/module/mylivechat.tpl
+
+catalog/controller/module/mylivechat.php
+catalog/language/[english]/module/mylivechat.php
+catalog/view/theme/[default]/template/module/mylivechat.tpl
+
+* [english] and [default] means that if you have different language and theme just copy in your language 
+
+and theme
+
+Setup
+=========
+* Log into the admin section of your openCart Site e.g www.yoursite.com/admin.
+* Select Extensions - > Modules and click install on MyLiveChat.
+
+Edit Module Setting
+=========
+* Extensions - > Modules and click Edit on MyLiveChat.
+* Please insert your MyLiveChat account then Save it.
+* If you don't have one, please register here https://www.mylivechat.com/register.aspx
+* Also please configure this module to show in which template section
+
+Test
+=========
+Once you have setup the module just take look your live website.
+
+Need Help?
+=========
+Please get in touch with me in comment :D
+
+Reference
+========
+More About MyLiveChat
+https://www.mylivechat.com
+
+Regards
+
+
+ChangeLog
+=======
+1.0.0
+-init release
+

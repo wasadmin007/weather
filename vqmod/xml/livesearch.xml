@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+
+	<id>LiveSearch Autofill (CZ:našeptávač)</id>
+	<version>1.2.0</version>
+	<vqmver>2.0.0</vqmver>
+	<author>MojeGalanterka.cz</author>
+
+  <file name="catalog/controller/product/search.php">
+    <operation>
+			<search position="after" offset="1"><![CDATA[$this->response->setOutput($this->render());]]></search>
+			                      <add><![CDATA[
+	// livesearch
+	public function ajax() {  
+
+		$data = array();
+    if( isset($this->request->get['keyword']) ) {
+		  
+      // parametry      
+      $keywords_length = 3;   // minimalni delka hledaneho vyrazu
+      $sql_limit = 15;        // maximalni pocet nalezenych produktu
+      $model_display = false; // false | true (zobrazit model?)			
+      
+      // Parse all keywords to lowercase
+			$keywords = strtolower( $this->request->get['keyword'] );
+			
+      // Perform search only if we have some keywords
+			if( strlen($keywords) >= $keywords_length ) {
+				$parts = explode( ' ', $keywords );
+				$add = '';
+				// Generating search
+				foreach( $parts as $part ) {
+					$add .= ' AND (LOWER(pd.name) LIKE "%' . $this->db->escape($part) . '%"
+				             OR  LOWER(p.model) LIKE "%' . $this->db->escape($part) . '%")';
+				}
+				$add = substr( $add, 4 );
+				$sql = '
+          SELECT pd.product_id, pd.name, p.model 
+          FROM ' . DB_PREFIX . 'product_description AS pd 
+          LEFT JOIN ' . DB_PREFIX . 'product AS p ON p.product_id = pd.product_id 
+          LEFT JOIN ' . DB_PREFIX . 'product_to_store AS p2s ON p2s.product_id = pd.product_id 
+          WHERE ' . $add . ' 
+            AND p.status = 1 
+            AND pd.language_id = ' . (int)$this->config->get('config_language_id') . '
+            AND p2s.store_id = ' . (int)$this->config->get('config_store_id') . '
+          ORDER BY p.sort_order ASC, LOWER(pd.name) ASC, LOWER(p.model) ASC
+          LIMIT ' . $sql_limit;
+				$res = $this->db->query( $sql );
+				if( $res ) {
+					$data = ( isset($res->rows) ) ? $res->rows : $res->row;
+	
+					// For the seo url stuff
+					$url = 'search=' . $this->request->get['keyword']; 
+          foreach( $data as $key => $values ) {
+						$data[$key] = array(
+							'name' => htmlspecialchars_decode($values['name'] . ( $model_display ? ' (' . $values['model'] . ')' : ''), ENT_QUOTES),
+							'href' => $this->url->link('product/product', $url . '&product_id=' . $values['product_id'])
+						);
+					} // foreach
+          
+          // link to search page
+          $data_total = count($data);  
+          // is total results >= limit ?
+          if ( $data_total >= $sql_limit ) {
+            $sql_total = '
+              SELECT COUNT(pd.product_id) as product_total  
+              FROM ' . DB_PREFIX . 'product_description AS pd 
+              LEFT JOIN ' . DB_PREFIX . 'product AS p ON p.product_id = pd.product_id 
+              LEFT JOIN ' . DB_PREFIX . 'product_to_store AS p2s ON p2s.product_id = pd.product_id 
+              WHERE ' . $add . ' 
+                AND p.status = 1 
+                AND pd.language_id = ' . (int)$this->config->get('config_language_id') . '
+                AND p2s.store_id = '   . (int)$this->config->get('config_store_id') . '
+              ';
+				    $res_total = $this->db->query( $sql_total );
+            $product_total = $res_total->row['product_total'];            
+
+            // Show MORE if result > count viewed
+            if ( $product_total > $data_total ) {           
+              // search: hleda (nazev,popisek) pouze cely retezec | livesearch: hleda (nazev,model) kteroukoliv cast fraze ! proto nesouhlasi "total"              
+              $this->language->load('product/search');              
+              $data[] = array(
+                'li_class' => 'more',
+                //'name' => $this->language->get('text_livesearch_more') . ' (' . $product_total . ')',
+                'name' => $this->language->get('text_livesearch_more'),
+                'href' => $this->url->link('product/search', $url . '&description=true')          
+              );
+            }
+            
+          }
+          
+				}
+			}      		
+    } // if keyword
+    echo json_encode( $data ); 
+	} // ajax
+                            ]]></add>
+		</operation>
+	</file>
+
+  <!-- LANGUAGE -->
+  <file name="catalog/language/czech/product/search.php">
+    <operation error="skip">
+			<search position="before"><![CDATA[$_['text_search']]]></search>
+			                     <add><![CDATA[$_['text_livesearch_more'] = 'Zobrazit všechny výsledky';]]></add>
+		</operation>
+	</file>
+  <file name="catalog/language/english/product/search.php">
+    <operation error="skip">
+			<search position="before"><![CDATA[$_['text_search']]]></search>
+			                     <add><![CDATA[$_['text_livesearch_more'] = 'Show all results';]]></add>
+		</operation>
+	</file>  
+
+  <file name="catalog/view/theme/*/template/common/header.tpl">
+    <operation>
+			<search position="before"><![CDATA[<?php foreach ($scripts as $script) { ?>]]></search>
+			                     <add><![CDATA[
+<!-- livesearch -->
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/<?php echo $this->config->get('config_template'); ?>/stylesheet/livesearch.min.css" />
+<script type="text/javascript" src="catalog/view/javascript/jquery/livesearch.min.js"></script>
+      ]]></add>
+		</operation>
+	</file>
+
+</modification>

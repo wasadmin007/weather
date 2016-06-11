@@ -1,0 +1,172 @@
+<modification>
+	<id><![CDATA[My General Tab]]></id>
+	<version><![CDATA[1.0.1]]></version>
+	<vqmver><![CDATA[2.1.0]]></vqmver>
+	<author><![CDATA[Fabius - http://opencartit.altervista.org]]></author>
+	<file name="admin/language/*/catalog/product.php">
+	    <operation>
+			<search position="before"><![CDATA[?>]]></search>
+			<add><![CDATA[$_['entry_price_description']	 = 'Use . as decimal separator';]]></add>
+		</operation>			
+	</file>
+	<file name="admin/language/english/catalog/product.php">
+	    <operation>
+			<search position="before"><![CDATA[?>]]></search>
+			<add><![CDATA[$_['entry_price_description']	 = '']]></add>
+		</operation>			
+	</file>
+	<file name="admin/language/italian/catalog/product.php" error="skip">
+	    <operation error="skip">
+			<search position="before"><![CDATA[?>]]></search>
+			<add><![CDATA[$_['entry_price_description']	 = 'Usare il . come separatore decimale';]]></add>
+		</operation>			
+	</file>
+	<file name="admin/view/template/catalog/product_form.tpl">
+	    <operation>
+			<search position="top"><![CDATA[]]></search>
+			<add><![CDATA[<?php	$arr_mygt = explode(',', $this->config->get('mygt_setting')); ?>]]></add>
+		</operation>			
+		<operation>
+			<search position="replace" offset="6"><![CDATA[<td><span class="required">*</span> <?php echo $entry_model; ?></td>]]></search>
+			<add><![CDATA[]]></add>
+		</operation>
+		<operation>
+			<search position="replace" offset="3"><![CDATA[<td><?php echo $entry_price; ?></td>]]></search>
+			<add><![CDATA[]]></add>
+		</operation>
+		<operation>
+			<search position="replace" offset="5"><![CDATA[<td><?php echo $entry_image; ?></td>]]></search>
+			<add><![CDATA[]]></add>
+		</operation>
+		<operation>
+			<search position="before" offset="1"><![CDATA[<td><?php echo $entry_quantity; ?></td>]]></search>
+			<add><![CDATA[<?php if($arr_mygt[0] == 'n') { ?>]]></add>
+		</operation>
+		<operation>
+			<search position="after" offset="2"><![CDATA[<td><?php echo $entry_quantity; ?></td>]]></search>
+			<add><![CDATA[<?php } ?>]]></add>
+		</operation>
+		<operation>
+			<search position="before" offset="1"><![CDATA[<td><?php echo $entry_manufacturer; ?></td>]]></search>
+			<add><![CDATA[<?php if($arr_mygt[1] == 'n') { ?>]]></add>
+		</operation>
+		<operation>
+			<search position="after" offset="2"><![CDATA[<td><?php echo $entry_manufacturer; ?></td>]]></search>
+			<add><![CDATA[<?php } ?>]]></add>
+		</operation>
+		<operation>
+			<search position="before" offset="1"><![CDATA[<td><?php echo $entry_category; ?></td>]]></search>
+			<add><![CDATA[<?php if($arr_mygt[2] == 'n') { ?>]]></add>
+		</operation>
+		<operation>
+			<search position="after" offset="14"><![CDATA[<td><?php echo $entry_category; ?></td>]]></search>
+			<add><![CDATA[<?php } ?>]]></add>
+		</operation>
+		<operation>
+			<search position="before" offset="1"><![CDATA[<td><?php echo $entry_download; ?></td>]]></search>
+			<add><![CDATA[<?php if($arr_mygt[3] == 'n') { ?>]]></add>
+		</operation>
+		<operation>
+			<search position="after" offset="14"><![CDATA[<td><?php echo $entry_download; ?></td>]]></search>
+			<add><![CDATA[<?php } ?>]]></add>
+		</operation>
+		<operation>
+			<search position="after"><![CDATA[<div id="tab-general">]]></search>
+			<add><![CDATA[<table class="form">
+            <tr>
+                <td><?php echo $entry_image; ?></td>
+				<td><div class="image"><img src="<?php echo $thumb; ?>" alt="" id="thumb" /><br />
+                    <input type="hidden" name="image" value="<?php echo $image; ?>" id="image" />
+                    <a onclick="image_upload('image', 'thumb');"><?php echo $text_browse; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a onclick="$('#thumb').attr('src', '<?php echo $no_image; ?>'); $('#image').attr('value', '');"><?php echo $text_clear; ?></a></div></td>
+			</tr>
+			<tr>
+				<td><span class="required">*</span> <?php echo $entry_model; ?></td>
+				<td><input type="text" name="model" value="<?php echo $model; ?>" />
+                <?php if ($error_model) { ?>
+                <span class="error"><?php echo $error_model; ?></span>
+                <?php } ?>
+				</td>
+			</tr>
+			<tr>
+				<td><?php echo $entry_price; ?><br /><span class = "help"><?php echo $this->language->get('entry_price_description'); ?></span></td>
+				<td><?php echo $price_before; ?><input type="text" name="price" value="<?php echo $price; ?>" /><?php echo $price_after; ?></td>
+            </tr>
+			<?php if($arr_mygt[0] == 'y') { ?>
+			<tr>
+              <td><?php echo $entry_quantity; ?></td>
+              <td><input type="text" name="quantity" value="<?php echo $quantity; ?>" size="2" /></td>
+            </tr>
+			<?php } ?>
+			<?php if($arr_mygt[1] == 'y') { ?>
+            <tr>
+              <td><?php echo $entry_manufacturer; ?></td>
+              <td><input type="text" name="manufacturer" value="<?php echo $manufacturer ?>" /><input type="hidden" name="manufacturer_id" value="<?php echo $manufacturer_id; ?>" /></td>
+            </tr>
+			<?php } ?>
+			<?php if($arr_mygt[2] == 'y') { ?>
+            <tr>
+              <td><?php echo $entry_category; ?></td>
+              <td><input type="text" name="category" value="" /></td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+              <td><div id="product-category" class="scrollbox">
+                  <?php $class = 'odd'; ?>
+                  <?php foreach ($product_categories as $product_category) { ?>
+                  <?php $class = ($class == 'even' ? 'odd' : 'even'); ?>
+                  <div id="product-category<?php echo $product_category['category_id']; ?>" class="<?php echo $class; ?>"><?php echo $product_category['name']; ?><img src="view/image/delete.png" alt="" />
+                    <input type="hidden" name="product_category[]" value="<?php echo $product_category['category_id']; ?>" />
+                  </div>
+                  <?php } ?>
+                </div></td>
+            </tr> 			
+			<?php } ?>
+			<?php if($arr_mygt[3] == 'y') { ?>
+			<tr>
+              <td><?php echo $entry_download; ?></td>
+              <td><input type="text" name="download" value="" /></td>
+            </tr>			
+            <tr>
+              <td>&nbsp;</td>
+              <td><div id="product-download" class="scrollbox">
+                  <?php $class = 'odd'; ?>
+                  <?php foreach ($product_downloads as $product_download) { ?>
+                  <?php $class = ($class == 'even' ? 'odd' : 'even'); ?>
+                  <div id="product-download<?php echo $product_download['download_id']; ?>" class="<?php echo $class; ?>"> <?php echo $product_download['name']; ?><img src="view/image/delete.png" alt="" />
+                    <input type="hidden" name="product_download[]" value="<?php echo $product_download['download_id']; ?>" />
+                  </div>
+                  <?php } ?>
+                </div></td>
+            </tr>
+			<?php } ?>
+            </table>]]></add>
+		</operation>
+	</file>
+	<file name="admin/controller/catalog/product.php">
+		<operation error="skip">
+			<search position="before"><![CDATA[$this->load->model('localisation/tax_class');]]></search>
+			<add><![CDATA[$this->load->model('localisation/currency');
+			$curr = $this->model_localisation_currency->getCurrencyByCode($this->config->get('config_currency'));
+			$this->data['price_before'] = $curr['symbol_left'];
+			$this->data['price_after'] = $curr['symbol_right'];
+
+			function floatNumber($number) {
+				if ((float)$number == 0) return 0;
+				$number_array = explode('.',(float)$number);
+				$left = $number_array[0];
+				if (count($number_array)>1) $right = $number_array[1]; else $right='';
+				return number_format($number,2,'.','');
+			}
+
+			$this->data['price'] = floatNumber($this->data['price']);]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="replace"><![CDATA[$result['price']]]></search>
+			<add><![CDATA[$this->currency->format($result['price'])]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="replace"><![CDATA[$product_special['price']]]></search>
+			<add><![CDATA[$this->currency->format($product_special['price'])]]></add>
+		</operation>
+	</file>
+</modification>

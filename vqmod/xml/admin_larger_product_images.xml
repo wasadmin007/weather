@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+   <id>Larger product images in admin</id>
+  <version>1.0</version>
+  <vqmver>2.4.0</vqmver>
+  <author>Neocreo Design Solutions</author>
+        
+        <file name="admin/controller/catalog/product.php">
+                <operation info="find the string with image-size and change it">
+
+                        <search position="replace"><![CDATA[
+                          $this->model_tool_image->resize($result['image'], 40, 40);
+                          ]]></search>
+
+                        <add><![CDATA[
+                        $image = $this->model_tool_image->resize($result['image'], 125, 125);// Larger image - change width and height here
+                        ]]></add>
+
+                </operation>
+        </file>
+        
+</modification>
+
+

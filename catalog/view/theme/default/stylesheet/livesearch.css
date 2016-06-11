@@ -1,0 +1,51 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*Auto fill*/
+#livesearch_search_results {
+	margin:0px;
+	padding:5px;
+	position: absolute;
+	top: 25px;
+	left: 0;
+	background-color: #fff;
+	list-style-type: none;
+	z-index: 9999;
+	width: 285px;
+	border: 1px solid #eee;
+	color: #fff;
+	border-radius: 0 0 5px 5px;
+	-moz-border-radius: 0 0 5px 5px;
+	-o-border-radius: 0 0 5px 5px;
+	-webkit-border-radius: 0 0 5px 5px;
+	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+#livesearch_search_results li {
+	padding: 5px;
+}
+#livesearch_search_results li + li {
+	border-top: 1px solid #eee;
+}
+#livesearch_search_results a,
+#livesearch_search_results a:visited {
+	text-decoration: none;
+	width: 100%;
+	display: block;
+}
+#livesearch_search_results a:hover {
+	color: #000 !important; /* #333 */
+}
+#livesearch_search_results li:hover {
+	background-color: #eee; /* #f5f5f5 #38B0E3 */
+	color: #000 !important; /* #333 */
+}
+#livesearch_search_results li:hover a {
+	color: #000 !important; /* #333 */
+}
+#livesearch_search_results .highlighted {
+	background-color: #eee; /* #f5f5f5 #38B0E3 */
+	color: #000 !important; /* #333 */
+}
+#livesearch_search_results .more {
+	text-align: center;
+}

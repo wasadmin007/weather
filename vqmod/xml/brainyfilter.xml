@@ -1,0 +1,184 @@
+<modification>  
+   <id>Brainy Filter</id>
+   <version>1.5.0</version>
+   <vqmver>2.4.1</vqmver>
+   <author>Giant Leap Lab</author>
+   <file name="catalog/controller/product/category.php">
+   	  <operation>
+		  <search position="before"><![CDATA[$pagination = new Pagination();]]></search>
+		  <add>
+			  <![CDATA[
+				if (isset($this->request->get['bfilter'])) {
+					$url .= '&bfilter=' . urlencode(htmlspecialchars_decode($this->request->get['bfilter']));
+				}
+			  ]]>
+		  </add>
+	  </operation>
+	  <operation>
+		  <search position="before"><![CDATA[$this->data['sorts'] = array();]]></search>
+		  <add>
+			  <![CDATA[
+				if (isset($this->request->get['bfilter'])) {
+					$url .= '&bfilter=' . urlencode(htmlspecialchars_decode($this->request->get['bfilter']));
+				}
+			  ]]>
+		  </add>
+	  </operation>
+	  <operation>
+		  <search position="before"><![CDATA[$this->data['limits'] = array();]]></search>
+		  <add>
+			  <![CDATA[
+				if (isset($this->request->get['bfilter'])) {
+					$url .= '&bfilter=' . urlencode(htmlspecialchars_decode($this->request->get['bfilter']));
+				}
+			  ]]>
+		  </add>
+	  </operation>
+	  <operation>
+		  <search position="replace" index="1"><![CDATA[$product_total = $this->model_catalog_product->getTotalProducts($data);]]></search>
+		  <add>
+			  <![CDATA[
+				$bfModuleConf  = $this->config->get('brainyfilter_module');
+				$isBfInstalled = is_array($bfModuleConf) && count($bfModuleConf);
+				$bfModuleConf  = $isBfInstalled ? array_pop($bfModuleConf) : false;
+				$isBfEnabled   = $bfModuleConf ? $bfModuleConf['status'] : false;
+				$product_total = 0;
+				if (!$isBfEnabled || $this->config->get('config_product_count')) {
+					$product_total = $this->model_catalog_product->getTotalProducts($data);
+				}]]>
+		  </add>
+	  </operation>
+	  <operation>
+			<search position="before"><![CDATA[$product_total = $this->model_catalog_product->getTotalProducts($data);]]></search>
+            <add><![CDATA[
+					$settings = $this->config->get('attr_setting');
+					if (isset($settings['subcategories_fix']) && $settings['subcategories_fix']) {
+						$data['filter_sub_category'] = true;
+					}]]>
+			</add>
+	  </operation>
+   </file>
+   <file name="catalog/view/theme/*/template/product/category.tpl">
+   	  <operation>
+		   <search position="before"><![CDATA[<?php echo $header; ?>]]></search>
+		  <add>
+			  <![CDATA[<?php if (!$this->registry->get('category_ajax')) : ?>]]>
+		  </add>
+	  </operation>
+	  <operation>
+		  <search position="before" index="1"><![CDATA[<?php if ($products) { ?>]]></search>
+		  <add><![CDATA[
+		  <?php endif; ?>
+		  <div id="brainyfilter-product-container">
+		  ]]></add>
+	  </operation>
+	  <operation>
+		  <search position="before"><![CDATA[<?php echo $content_bottom; ?>]]></search>
+		  <add><![CDATA[
+		  </div>
+		  <?php if (!$this->registry->get('category_ajax')) : ?>
+		  ]]></add>
+	  </operation>
+	  <operation>
+		  <search position="bottom"></search>
+		  <add>
+			  <![CDATA[<?php endif; ?>]]>
+		  </add>
+	  </operation>
+   </file>
+    <file name="catalog/model/catalog/product.php">
+        <operation>
+		  <search position="before" index="1">
+			  <![CDATA[$query = $this->db->query($sql);]]>
+		  </search>
+		  <add>
+			  <![CDATA[
+				$bfModuleConf  = $this->config->get('brainyfilter_module');
+				$isBfInstalled = is_array($bfModuleConf) && count($bfModuleConf);
+				$bfModuleConf  = $isBfInstalled ? array_pop($bfModuleConf) : false;
+				$isBfEnabled   = $bfModuleConf ? $bfModuleConf['status'] : false;
+				if ($isBfEnabled  && isset($data['filter_filter'])) {
+					$this->load->model('module/brainyfilter');
+					$sql = $this->model_module_brainyfilter->prepareQueryForCategory($sql);
+				}]]>
+
+		  </add>
+	  </operation>
+	  <operation>
+		  <search position="before" index="3">
+			  <![CDATA[$query = $this->db->query($sql);]]>
+		  </search>
+		  <add>
+			  <![CDATA[
+				$bfModuleConf  = $this->config->get('brainyfilter_module');
+				$isBfInstalled = is_array($bfModuleConf) && count($bfModuleConf);
+				$bfModuleConf  = $isBfInstalled ? array_pop($bfModuleConf) : false;
+				$isBfEnabled   = $bfModuleConf ? $bfModuleConf['status'] : false;
+				if ($isBfEnabled  && isset($data['filter_filter'])) {
+					$this->load->model('module/brainyfilter');
+					$sql = $this->model_module_brainyfilter->prepareQueryForTotal($sql);
+				}]]>
+		  </add>
+	  </operation>
+   </file>
+   <file name="catalog/controller/module/category.php">
+   	  <operation error="skip">
+		  <search position="replace"><![CDATA[$total = $this->model_catalog_product->getTotalProducts(array('filter_category_id' => $category['category_id']));]]></search>
+		  <add>
+			  <![CDATA[
+				$bfModuleConf  = $this->config->get('brainyfilter_module');
+				$isBfInstalled = is_array($bfModuleConf) && count($bfModuleConf);
+				$bfModuleConf  = $isBfInstalled ? array_pop($bfModuleConf) : false;
+				$isBfEnabled   = $bfModuleConf ? $bfModuleConf['status'] : false;
+				$total = 0;
+				if (!$isBfEnabled || $this->config->get('config_product_count')) {
+					$total = $this->model_catalog_product->getTotalProducts(array('filter_category_id' => $category['category_id']));
+				}]]>
+		  </add>
+	  </operation>
+	  <operation error="skip">
+		  <search position="before"><![CDATA[$product_total = $this->model_catalog_product->getTotalProducts($data);]]></search>
+		  <add>
+			  <![CDATA[
+				$bfModuleConf  = $this->config->get('brainyfilter_module');
+				$isBfInstalled = is_array($bfModuleConf) && count($bfModuleConf);
+				$bfModuleConf  = $isBfInstalled ? array_pop($bfModuleConf) : false;
+				$isBfEnabled   = $bfModuleConf ? $bfModuleConf['status'] : false;
+				$product_total = 0;
+				if (!$isBfEnabled || $this->config->get('config_product_count')) {]]>
+		  </add>
+	  </operation>
+	  <operation error="skip">
+		  <search position="after"><![CDATA[$total += $product_total;]]></search>
+		  <add>
+			  <![CDATA[}]]>
+		  </add>
+	  </operation>
+   </file>
+     <file name="catalog/controller/common/header.php">
+   	  <operation>
+		  <search position="replace"><![CDATA[$product_total = $this->model_catalog_product->getTotalProducts($data);]]></search>
+		  <add>
+			  <![CDATA[
+				$bfModuleConf  = $this->config->get('brainyfilter_module');
+				$isBfInstalled = is_array($bfModuleConf) && count($bfModuleConf);
+				$bfModuleConf  = $isBfInstalled ? array_pop($bfModuleConf) : false;
+				$isBfEnabled   = $bfModuleConf ? $bfModuleConf['status'] : false;
+				$product_total = 0;
+				if (!$isBfEnabled || $this->config->get('config_product_count')) {
+					$product_total = $this->model_catalog_product->getTotalProducts($data);
+				}]]>
+		  </add>
+	  </operation>
+   </file>
+    <file name="admin/controller/module/brainyfilter.php">
+   	  <operation>
+		  <search position="after" offset="1"><![CDATA[$this->load->model('setting/setting');]]></search>
+		  <add>
+			  <![CDATA[
+				$vqmodeIsOn = true;
+				]]>
+		  </add>
+	  </operation>
+   </file>
+</modification>

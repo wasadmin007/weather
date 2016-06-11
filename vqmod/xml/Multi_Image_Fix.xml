@@ -1,0 +1,23 @@
+<modification>
+
+	<id>Multi Image Fix</id>
+	<version>1.0.0</version>
+	<vqmver>2.1.5</vqmver>
+	<author>Furqan Nadeem - Tristar Web Solutions</author>
+	
+	<file name="catalog/controller/product/product.php">
+		
+		<operation>
+			<search position="after"><![CDATA[$this->data['images'] = array();]]></search>
+			<add><![CDATA[$this->data['images'][] = array(
+					'popup' => $this->data['popup'],
+					'thumb' => $this->data['thumb'],
+					'small' => $this->model_tool_image->resize($product_info['image'], 90,90)
+				);]]></add>
+		</operation>
+		
+		
+		
+	</file>
+	
+</modification>

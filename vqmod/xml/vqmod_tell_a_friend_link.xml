@@ -1,0 +1,40 @@
+<modification>
+    <id>Best-Byte Tell a Friend Footer Link</id>
+      <version>1.0</version>
+		   <vqmver>2.1.7</vqmver>
+       <author>www.best-byte.com</author>		
+
+<file name="catalog/language/*/common/footer.php">
+    <operation>
+			<search position="before"><![CDATA[$_['text_manufacturer'] ]]></search>
+			<add><![CDATA[
+      $_['text_tellafriend'] = 'Tell a Friend';
+   ]]></add>
+	</operation>
+</file>	
+
+<file name="catalog/controller/common/footer.php">
+    <operation>
+			<search position="before"><![CDATA[$this->data['text_manufacturer'] = $this->language->get('text_manufacturer');]]></search>
+			<add><![CDATA[
+      $this->data['text_tellafriend'] = $this->language->get('text_tellafriend');
+   ]]></add>
+	</operation>
+    <operation>
+			<search position="before"><![CDATA[$this->data['account'] = $this->url->link('account/account', '', 'SSL');]]></search>
+			<add><![CDATA[
+      $this->data['tellafriend'] = $this->url->link('information/tellafriend', '', 'SSL');
+   ]]></add>
+	</operation>	
+</file>	
+
+<file name="catalog/view/theme/*/template/common/footer.tpl">
+    <operation>
+			<search position="before"><![CDATA[<li><a href="<?php echo $manufacturer; ?>"><?php echo $text_manufacturer; ?></a></li>]]></search>
+			<add><![CDATA[
+      <li><a href="<?php echo $tellafriend; ?>"><?php echo $text_tellafriend; ?></a></li>
+   ]]></add>
+	</operation>
+</file>		
+
+</modification>

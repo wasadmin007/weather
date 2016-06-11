@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+    <id>Facebook Sliding Tab</id>
+    <version>1.0.1</version>
+    <vqmver>2.1.6</vqmver>
+    <author>Chakal - Modified by Nyte_Ryda</author>   
+   
+   
+   <file name="catalog/view/theme/*/template/common/header.tpl">
+      <operation>
+         <search position="before"><![CDATA[
+         </head> ]]></search>
+         <add><![CDATA[
+   <!-- Calling the jquery without having to upload more files to root folder -->      
+
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>-->
+
+<script type="text/javascript">
+
+$(document).ready(function() {$(".w2bslikebox").hover(function() {$(this).stop().animate({right: "0"}, "medium");}, function() {$(this).stop().animate({right: "-250"}, "medium");}, 500);});
+
+</script>
+
+<style type="text/css">
+.w2bslikebox{background: url("catalog/view/theme/default/image/fbside.png") no-repeat scroll left center transparent !important;display: block;float: right;height: 70px;padding: 0 5px 0 25px;width: 245px;z-index: 99999;position:fixed;right:-250px;top:20%;}
+.w2bslikebox div{border:none;position:relative;display:block;}
+.w2bslikebox span{bottom: 12px;font: 8px "lucida grande",tahoma,verdana,arial,sans-serif;position: absolute;right: 6px;text-align: right;z-index: 99999;}
+.w2bslikebox span a{color: #808080;text-decoration:none;}
+.w2bslikebox span a:hover{text-decoration:underline;}
+</style><div class="w2bslikebox" style=""><div><iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2FjindruStores&amp; height: 300px;width=345px&amp;colorscheme=light&amp;show_faces=true&amp;connections=12&amp;stream=false&amp;header=true&amp;height=300" scrolling="no" frameborder="0" scrolling="no" style="border: medium none; overflow: hidden; height: 300px; width: 345px;" allowTransparency="true">
+</iframe>
+
+<iframe src="//www.facebook.com/plugins/follow.php?href=https%3A%2F%2Fwww.facebook.com%2FjindruStores&amp;width&amp;height=80&amp;colorscheme=light&amp;layout=standard&amp;show_faces=true" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:80px;" allowTransparency="true">
+ </iframe> </div></div>
+         ]]></add>
+      </operation>
+	  </file>      
+</modification>

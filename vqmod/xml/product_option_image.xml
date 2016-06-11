@@ -1,0 +1,86 @@
+<modification>
+        <id>product_option_image</id>
+        <version>5.0</version>
+        <vqmver>1.0</vqmver>
+        <author>ocextensions.co.uk</author>
+          
+        <file name="catalog/controller/checkout/cart.php">   
+              <operation>
+                        <search position="after"><![CDATA[$this->load->model('tool/image');]]></search>
+                        <add><![CDATA[                                             $this->load->model('catalog/product');]]></add>
+              </operation>
+              <operation>
+                        <search position="after"><![CDATA[$product_total = 0;]]></search>
+                        <add><![CDATA[                                             $p_options = $this->model_catalog_product->getProductOptions($product['product_id']);]]></add>
+              </operation>
+              <operation>
+                        <search position="after" offset="1"><![CDATA[$value = utf8_substr($filename]]></search>
+                        <add><![CDATA[                                                $oimage = '';                              
+                                              if ($option['type'] == 'select' || $option['type'] == 'radio' || $option['type'] == 'checkbox' || $option['type'] == 'image' AND $oimage == '') {
+                                                 foreach ($p_options as $pos) {
+                                                  if (is_array($pos['option_value'])) {
+                                                 foreach ($pos['option_value'] as $oname) {
+                                              if ($oname['name'] == $option['option_value']) $oimage = $oname['image'] ;
+                                              if ($oimage == 'no_image.jpg') $oimage = '';
+                                              }
+                                             }
+                                            } 
+                                           }
+				$ximage = $this->model_tool_image->resize($oimage,$this->config->get('config_image_cart_width'), $this->config->get('config_image_cart_height'));]]></add>
+              </operation>
+              <operation>
+                        <search position="after"><![CDATA[$option_data[] = array(]]></search>
+                        <add><![CDATA[                                               'oimage'=> $ximage,]]></add>
+              </operation>
+         </file> 
+         <file name="catalog/view/theme/*/template/checkout/cart.tpl">
+              <operation>
+                        <search position="before" offset="1"><![CDATA[if ($product['thumb']]]></search>
+                        <add><![CDATA[                 <?php foreach ($product['option'] as $option) { 
+             if ($option['oimage']) $product['thumb'] = $option['oimage'];
+               }?> ]]></add>
+              </operation>
+         </file>    
+         
+                 <file name="catalog/controller/module/cart.php">   
+              <operation>
+                        <search position="after"><![CDATA[$this->load->model('tool/image');]]></search>
+                        <add><![CDATA[                                             $this->load->model('catalog/product');]]></add>
+              </operation>
+              <operation>
+                        <search position="after"><![CDATA[$option_data = array();]]></search>
+                        <add><![CDATA[                                             $p_options = $this->model_catalog_product->getProductOptions($product['product_id']);]]></add>
+              </operation>
+              <operation>
+                        <search position="after" offset="1"><![CDATA[$value = utf8_substr($filename]]></search>
+                        <add><![CDATA[                                                $oimage = '';                              
+                                              if ($option['type'] == 'select' || $option['type'] == 'radio' || $option['type'] == 'checkbox' || $option['type'] == 'image') {
+                                                 foreach ($p_options as $pos) {
+                                                 if (is_array($pos['option_value'])) {
+                                                 foreach ($pos['option_value'] as $oname) {
+                                              if ($oname['name'] == $option['option_value']) $oimage = $oname['image'] ;
+                                              if ($oimage == 'no_image.jpg') $oimage = '';
+                                              }
+                                             }
+                                            } 
+                                           }
+				$ximage = $this->model_tool_image->resize($oimage,$this->config->get('config_image_cart_width'), $this->config->get('config_image_cart_height'));]]></add>
+              </operation>
+              <operation>
+                        <search position="after"><![CDATA[$option_data[] = array(]]></search>
+                        <add><![CDATA[                                               'oimage'=> $ximage,]]></add>
+              </operation>
+         </file> 
+         <file name="catalog/view/theme/*/template/module/cart.tpl">
+              <operation>
+                        <search position="before" offset="1"><![CDATA[if ($product['thumb']]]></search>
+                        <add><![CDATA[                 <?php foreach ($product['option'] as $option) { 
+             if ($option['oimage']) $product['thumb'] = $option['oimage'];
+               }?> ]]></add>
+              </operation>
+         </file>    
+         
+ 
+</modification>
+
+
